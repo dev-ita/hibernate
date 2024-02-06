@@ -11,6 +11,7 @@ public class AppTest {
         UsuarioPessoa usuario = new UsuarioPessoa("Ítalo", "Oliveira", "italo.ods@hotmail.com", "italo1071", "isabele123");
         GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
         genericDao.salvar(usuario);
+        System.out.println(usuario.getClass());
     }
 
     @Test
