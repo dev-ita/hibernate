@@ -53,7 +53,16 @@ public class AppTest {
     @Test
     public void testeQueryList() {
         GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
-        List<UsuarioPessoa> list = genericDao.getEntityManager().createQuery("from UsuarioPessoa").getResultList();
+        List list = genericDao.getEntityManager().createQuery("from " + UsuarioPessoa.class.getSimpleName()).getResultList();
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    public void testeQueryListMaxResult() {
+        GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
+        List list = genericDao.getEntityManager().createQuery("from " + UsuarioPessoa.class.getSimpleName() + " order by nome")
+                .setMaxResults(4)
+                .getResultList();
         list.forEach(System.out::println);
     }
 }

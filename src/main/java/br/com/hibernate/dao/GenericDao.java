@@ -6,7 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 public class GenericDao<E> {
-    private EntityManager entityManager = HibernateUtil.getEntityManager();
+    private final EntityManager entityManager = HibernateUtil.getEntityManager();
+
     public void salvar(E entity) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
