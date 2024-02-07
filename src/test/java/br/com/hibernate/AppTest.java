@@ -65,4 +65,14 @@ public class AppTest {
                 .getResultList();
         list.forEach(System.out::println);
     }
+
+    @Test
+    public void testeQueryListParameter() {
+        GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
+        List<UsuarioPessoa> list = genericDao.getEntityManager().createQuery("from UsuarioPessoa where nome = :nome or sobrenome = :sobrenome")
+                .setParameter("nome", "Isabele")
+                .setParameter("sobrenome", "Oliveira")
+                .getResultList();
+        list.forEach(System.out::println);
+    }
 }
