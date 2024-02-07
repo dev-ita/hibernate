@@ -24,13 +24,11 @@ public class GenericDao<E> {
 
     public E consulta(E entidade) {
         Object id = HibernateUtil.getPrimaryKey(entidade);
-        E resultadoConsulta = (E) entityManager.find(entidade.getClass(), id);
-        return resultadoConsulta;
+        return (E) entityManager.find(entidade.getClass(), id);
     }
 
     public E consulta(Long id, Class<E> entidade) {
-        E resultadoConsulta = entityManager.find(entidade, id);
-        return resultadoConsulta;
+        return entityManager.find(entidade, id);
     }
 
     public void deletarPorId(E entidade) {
@@ -49,5 +47,9 @@ public class GenericDao<E> {
         List<E> lista = entityManager.createQuery("from " + entidade.getName()).getResultList();
         entityTransaction.commit();
         return lista;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 }

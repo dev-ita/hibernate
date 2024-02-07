@@ -47,8 +47,13 @@ public class AppTest {
     public void testeListar() {
         GenericDao<UsuarioPessoa> daoGeneric = new GenericDao<>();
         List<UsuarioPessoa> listaUsuariosList = daoGeneric.listar(UsuarioPessoa.class);
-        listaUsuariosList.forEach((element) -> {
-            System.out.println(element);
-        });
+        listaUsuariosList.forEach(System.out::println);
+    }
+
+    @Test
+    public void testeQueryList() {
+        GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
+        List<UsuarioPessoa> list = genericDao.getEntityManager().createQuery("from UsuarioPessoa").getResultList();
+        list.forEach(System.out::println);
     }
 }
