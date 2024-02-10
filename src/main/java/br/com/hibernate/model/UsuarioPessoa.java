@@ -1,11 +1,13 @@
 package br.com.hibernate.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "UsuarioPessoa.findAll", query = "select u from UsuarioPessoa u"),
+        @NamedQuery(name = "UsuarioPessoa.sumIds", query = "select sum(u.id) from UsuarioPessoa u"),
+        @NamedQuery(name = "UsuarioPessoa.buscaPorNome", query = "select u from UsuarioPessoa u where u.nome = :nome"),
+})
 public class UsuarioPessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

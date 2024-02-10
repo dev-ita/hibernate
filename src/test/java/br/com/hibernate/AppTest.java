@@ -82,4 +82,17 @@ public class AppTest {
         Long somaIds = (Long) genericDao.getEntityManager().createQuery("select sum(u.id) from UsuarioPessoa u").getSingleResult();
         System.out.println("ids somados = " + somaIds);
     }
+
+    @Test
+    public void testeNamedQueries() {
+        GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
+        List<UsuarioPessoa> usuarioPessoasList = genericDao.getEntityManager().createNamedQuery("UsuarioPessoa.findAll").getResultList();
+        usuarioPessoasList.forEach(System.out::println);
+
+        Long somaIds = (Long) genericDao.getEntityManager().createNamedQuery("UsuarioPessoa.sumIds").getSingleResult();
+        System.out.println("Resultado da soma dos ids: " + somaIds);
+
+        UsuarioPessoa buscaPorNome = (UsuarioPessoa) genericDao.getEntityManager().createNamedQuery("UsuarioPessoa.buscaPorNome").setParameter("nome", "Isabele").getSingleResult();
+        System.out.println(buscaPorNome);
+    }
 }
