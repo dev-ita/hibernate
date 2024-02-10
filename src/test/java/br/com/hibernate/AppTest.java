@@ -75,4 +75,11 @@ public class AppTest {
                 .getResultList();
         list.forEach(System.out::println);
     }
+
+    @Test
+    public void testeQuerySomaId() {
+        GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
+        Long somaIds = (Long) genericDao.getEntityManager().createQuery("select sum(u.id) from UsuarioPessoa u").getSingleResult();
+        System.out.println("ids somados = " + somaIds);
+    }
 }
