@@ -1,6 +1,7 @@
 package br.com.hibernate.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NamedQueries({
@@ -19,6 +20,9 @@ public class UsuarioPessoa {
     private String login;
     private String senha;
 
+    @OneToMany(mappedBy = "usuarioPessoa", fetch = FetchType.EAGER)
+    private List<TelefoneUser> telefoneUserList;
+
     public UsuarioPessoa() {}
 
     public UsuarioPessoa(String nome, String sobrenome, String email, String login, String senha) {
@@ -27,6 +31,14 @@ public class UsuarioPessoa {
         this.email = email;
         this.login = login;
         this.senha = senha;
+    }
+
+    public List<TelefoneUser> getTelefoneUserList() {
+        return telefoneUserList;
+    }
+
+    public void setTelefoneUserList(List<TelefoneUser> telefoneUserList) {
+        this.telefoneUserList = telefoneUserList;
     }
 
     public Long getId() {

@@ -1,6 +1,7 @@
 package br.com.hibernate;
 
 import br.com.hibernate.dao.GenericDao;
+import br.com.hibernate.model.TelefoneUser;
 import br.com.hibernate.model.UsuarioPessoa;
 import org.junit.Test;
 import java.util.List;
@@ -94,5 +95,21 @@ public class AppTest {
 
         UsuarioPessoa buscaPorNome = (UsuarioPessoa) genericDao.getEntityManager().createNamedQuery("UsuarioPessoa.buscaPorNome").setParameter("nome", "Isabele").getSingleResult();
         System.out.println(buscaPorNome);
+    }
+
+    @Test
+    public void testeGravaTelefone() {
+        GenericDao genericDao = new GenericDao();
+        UsuarioPessoa pessoa = (UsuarioPessoa) genericDao.consulta(3L, UsuarioPessoa.class);
+        TelefoneUser telefoneUser = new TelefoneUser("Casa", "(91)988123391", pessoa);
+
+        genericDao.salvar(telefoneUser);
+    }
+
+    @Test
+    public void testeConsultaTelefones() {
+        GenericDao<UsuarioPessoa> genericDao = new GenericDao<>();
+        UsuarioPessoa pessoa = genericDao.consulta(3L, UsuarioPessoa.class);
+        System.out.println(pessoa.getTelefoneUserList());
     }
 }
